@@ -30,7 +30,7 @@ class Slide10NegativePosts(SlideGenerator):
 
         if df_topics.empty:
             return {
-                "title":      f"Top các bài đăng tiêu cực về {brand.upper()}",
+                "title":      f"TOP CÁC BÀI ĐĂNG TIÊU CỰC VỀ {brand.upper()}",
                 "subtitle":   f"Top 10 bài đăng nhận được phản hồi tiêu cực từ cộng đồng",
                 "table_rows": [],
             }

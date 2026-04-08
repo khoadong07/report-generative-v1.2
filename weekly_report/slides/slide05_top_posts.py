@@ -82,7 +82,7 @@ class Slide05TopPosts(SlideGenerator):
                 for i, r in enumerate(df.itertuples(), 1)
             ]
 
-        title = "Top bài đăng có tương tác cao nhất" if show_interactions else "Top bài đăng nổi bật"
+        title = "TOP BÀI ĐĂNG CÓ TƯƠNG TÁC CAO NHẤT" if show_interactions else "TOP BÀI ĐĂNG NỔI BẬT"
         return {
             "title":             title,
             "subtitle":          f"",

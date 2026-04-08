@@ -67,7 +67,7 @@ class Slide04TopSources(SlideGenerator):
                 for i, r in enumerate(agg.itertuples(), 1)
             ]
 
-        title = "Top nguồn có lượng tương tác cao nhất" if show_interactions else "Top nguồn có lượng đề cập cao nhất"
+        title = "TOP NGUỒN CÓ LƯỢT LƯƠNG TÁC CAO NHẤT" if show_interactions else "TOP NGUỒN CÓ LƯỢNG ĐỀ CẬP CAO NHẤT"
         return {
             "title":             title,
             "subtitle":          f"",

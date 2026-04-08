@@ -58,7 +58,7 @@ class Slide12BrandRanking(SlideGenerator):
             row["stt"] = i + 1
 
         return {
-            "title":    "Bảng xếp hạng tổng lượt thảo luận theo thương hiệu",
+            "title":    "BẢNG XẾP HẠNG TỔNG LƯỢT THẢO LUẬN THEO THƯƠNG HIỆU",
             "subtitle": f"",
             "table":    rows,
         }

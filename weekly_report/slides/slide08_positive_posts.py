@@ -30,7 +30,7 @@ class Slide08PositivePosts(SlideGenerator):
 
         if df_topics.empty:
             return {
-                "title":      f"Top các bài đăng tích cực về {brand.upper()}",
+                "title":      f"TOP CÁC BÀI ĐĂNG TÍCH CỰC VỀ {brand.upper()}",
                 "subtitle":   f"Top 10 bài đăng nhận được phản hồi tích cực từ cộng đồng",
                 "table_rows": [],
             }

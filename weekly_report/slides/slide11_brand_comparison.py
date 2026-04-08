@@ -62,7 +62,7 @@ class Slide11BrandComparison(SlideGenerator, InsightMixin):
         )
 
         return {
-            "title":    f"Tổng quan đề cập về thương hiệu {brand.upper()} với các đối thủ",
+            "title":    f"TỔNG QUAN ĐỀ CẬP VỀ THƯƠNG HIỆU {brand.upper()} VỚI CÁC ĐỐI THỦ",
             "subtitle": f"",
             "insight":  insight,
             "donut_charts": {

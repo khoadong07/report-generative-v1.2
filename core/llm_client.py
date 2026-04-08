@@ -4,6 +4,43 @@ LLM client wrapper for generating insights
 
 from openai import OpenAI
 from typing import Optional
+import re
+
+
+def format_numbers_in_text(text: str) -> str:
+    """
+    Format numbers in text to include thousand separators.
+    Examples:
+        1000 -> 1,000
+        15000 -> 15,000
+        1234567 -> 1,234,567
+    
+    Args:
+        text: Input text with numbers
+        
+    Returns:
+        Text with formatted numbers
+    """
+    def format_number(match):
+        num_str = match.group(0)
+        # Skip if already has comma or is part of a decimal
+        if ',' in num_str or '.' in num_str:
+            return num_str
+        
+        try:
+            num = int(num_str)
+            # Only format numbers >= 1000
+            if num >= 1000:
+                return f"{num:,}"
+            return num_str
+        except ValueError:
+            return num_str
+    
+    # Match standalone numbers (not part of URLs, dates, or already formatted)
+    # Negative lookbehind: not preceded by . or /
+    # Negative lookahead: not followed by . or /
+    pattern = r'(?<![.,/])\b(\d{4,})\b(?![.,/])'
+    return re.sub(pattern, format_number, text)
 
 
 class LLMClient:
@@ -27,13 +64,15 @@ class LLMClient:
         self.system_prompt = system_prompt
     
     def generate_insight(self, prompt: str, 
-                         system_prompt: Optional[str] = None) -> str:
+                         system_prompt: Optional[str] = None,
+                         format_numbers: bool = True) -> str:
         """
         Generate insight using LLM
         
         Args:
             prompt: User prompt
             system_prompt: Optional system prompt override
+            format_numbers: Whether to format numbers with thousand separators
             
         Returns:
             Generated text
@@ -55,4 +94,10 @@ class LLMClient:
         elapsed = time.time() - start_time
         print(f"         → API call completed in {elapsed:.1f}s")
         
-        return response.choices[0].message.content.strip()
+        result = response.choices[0].message.content.strip()
+        
+        # Format numbers in the result
+        if format_numbers:
+            result = format_numbers_in_text(result)
+        
+        return result

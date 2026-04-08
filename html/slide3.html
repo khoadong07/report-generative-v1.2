@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Channel Distribution</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        .slide-container {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            background-color: #f5f7fa;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 720px; background-color: #f5f7fa; z-index: 0;"></div>
+<!-- Top Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_2.png'); background-size: cover; z-index: 202;"></div>
+<!-- Header Section -->
+<!-- Kompa.ai Logo -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 40px; width: 200px; height: 30px; z-index: 203;">
+<p style="margin: 0; font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: 700; color: #0045c4;">Kompa.ai</p>
+</div>
+<!-- Date Range -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 991px; top: 45px; width: 229px; height: 20px; z-index: 204; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; color: #6b7280;">{{DATE_RANGE}}</p>
+</div>
+<!-- Main Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 80px; width: 1160px; height: 44px; z-index: 205;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 700; color: #111827;">{{TITLE}}</p>
+</div>
+<!-- Subtitle -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 130px; width: 531px; height: 21px; z-index: 206;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 17.33px; color: #4b5563;">{{SUBTITLE}}</p>
+</div>
+<!-- Left Chart Container (Donut) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 180px; width: 570px; height: 350px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<!-- Donut Chart Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 200px; width: 300px; height: 25px; z-index: 209;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: #111827;">Tỷ trọng theo kênh</p>
+</div>
+<!-- Donut Chart -->
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 80px; top: 230px; width: 260px; height: 280px; z-index: 210;">
+<canvas id="donutChart"></canvas>
+</div>
+<!-- Center Text Donut -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 160px; top: 350px; width: 100px; height: 50px; z-index: 211; text-align: center;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #6b7280;">Tổng lượt</p>
+<p style="margin: 4px 0 0 0; font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 700; color: #111827;">{{TOTAL_COUNT}}</p>
+</div>
+<!-- Custom Legend Donut -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 500px; top: 290px; width: 250px; height: 250px; z-index: 212;">
+{{CHANNEL_LEGEND}}
+</div>
+<!-- Right Chart Container (Bar) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 650px; top: 180px; width: 570px; height: 350px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<!-- Bar Chart Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 670px; top: 200px; width: 530px; height: 25px; z-index: 213;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: #111827;">Top 10 nguồn thảo luận nổi bật</p>
+</div>
+<!-- Bar Chart -->
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 660px; top: 230px; width: 550px; height: 280px; z-index: 214;">
+<canvas id="barChart"></canvas>
+</div>
+<!-- Footer Section -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 550px; width: 1160px; height: 145px; background-color: #f3f4f6; border-radius: 8px; z-index: 100;"></div>
+<!-- Blue Vertical Bar -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 550px; width: 6px; height: 145px; background-color: #0045c4; border-top-left-radius: 8px; border-bottom-left-radius: 8px; z-index: 101;"></div>
+<!-- Footer Content -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 560px; width: 1120px; height: 125px; z-index: 233;">
+<p style="margin: 0 0 8px 0; font-family: 'Inter', sans-serif; font-size: 13.33px; font-weight: 700; color: #374151;">NHẬN ĐỊNH:</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #374151; line-height: 1.5; text-align: justify;">
+            {{INSIGHT}}
+        </p>
+</div>
+<!-- Page Number -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1247px; top: 690px; width: 13px; height: 15px; z-index: 236;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #9ca3af; text-align: right;">3</p>
+</div>
+<!-- Bottom Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 712px; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_35.png'); background-size: cover; z-index: 235;"></div>
+<script>
+        // Donut Chart
+        const ctxDonut = document.getElementById('donutChart').getContext('2d');
+        new Chart(ctxDonut, {
+            type: 'doughnut',
+            data: {
+                labels: {{CHANNEL_LABELS}},
+                datasets: [{
+                    data: {{CHANNEL_DATA}},
+                    backgroundColor: {{CHANNEL_COLORS}},
+                    borderWidth: 0,
+                    hoverOffset: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                animation: false,
+                plugins: {
+                    legend: {
+                        display: false // Using custom legend
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    datalabels: {
+                        color: '#ffffff',
+                        font: {
+                            family: 'Inter',
+                            weight: 'bold',
+                            size: 13
+                        },
+                        formatter: function(value, context) {
+                            let total = context.chart._metasets[context.datasetIndex].total;
+                            let percentage = (value / total) * 100;
+                            // Only show percentage if >= 10%
+                            if (percentage >= 10) {
+                                return percentage.toFixed(1) + '%';
+                            }
+                            return '';
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Horizontal Bar Chart
+        const ctxBar = document.getElementById('barChart').getContext('2d');
+        const sourceLabels = {{SOURCE_LABELS}};
+        const sourceData = {{SOURCE_DATA}};
+        
+        // Truncate labels to max 20 characters
+        const truncatedLabels = sourceLabels.map(label => {
+            if (label.length > 20) {
+                return label.substring(0, 20) + '...';
+            }
+            return label;
+        });
+        
+        // Calculate max value to set appropriate scale
+        const maxValue = Math.max(...sourceData);
+        const suggestedMax = maxValue * 1.15; // Add 15% padding for labels
+        
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: truncatedLabels,
+                datasets: [{
+                    label: 'Lượt đề cập',
+                    data: sourceData,
+                    backgroundColor: '#0045c4',
+                    borderRadius: 4,
+                    barThickness: 16
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                layout: {
+                    padding: {
+                        right: 10
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: '#374151',
+                        font: {
+                            family: 'Inter',
+                            size: 11,
+                            weight: 'bold'
+                        },
+                        formatter: function(value) {
+                            return value.toLocaleString();
+                        },
+                        offset: 4
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: suggestedMax,
+                        grid: {
+                            color: '#f3f4f6'
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 10 },
+                            color: '#6b7280'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#374151',
+                            autoSkip: false
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    </script>
+</div>
+</body>
+</html>

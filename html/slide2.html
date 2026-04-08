@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BIDV Mentions Trend</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        .slide-container {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            background-color: #f5f7fa;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 720px; background-color: #f5f7fa; z-index: 0;"></div>
+<!-- Top Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_2.png'); background-size: cover; z-index: 202;"></div>
+<!-- Header Section -->
+<!-- Kompa.ai Logo -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 40px; width: 200px; height: 30px; z-index: 203;">
+<p style="margin: 0; font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: 700; color: #0045c4;">Kompa.ai</p>
+</div>
+<!-- Date Range - WILL BE REPLACED BY MERGE SCRIPT -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 991px; top: 45px; width: 229px; height: 20px; z-index: 204; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; color: #6b7280;">{{DATE_RANGE}}</p>
+</div>
+<!-- Main Title - WILL BE REPLACED BY MERGE SCRIPT -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 80px; width: 1200px; height: 44px; z-index: 205;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 700; color: #111827;">{{TITLE}}</p>
+</div>
+<!-- Subtitle - WILL BE REPLACED BY MERGE SCRIPT -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 130px; width: 531px; height: 21px; z-index: 206;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 17.33px; color: #4b5563;">{{SUBTITLE}}</p>
+</div>
+<!-- Chart Container -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 180px; width: 1160px; height: 300px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 80px; top: 200px; width: 1120px; height: 260px; z-index: 210;">
+<canvas id="trendChart"></canvas>
+</div>
+<!-- Events Grid Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 495px; width: 300px; height: 25px; z-index: 211;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: #111827;">DIỄN BIẾN CHÍNH</p>
+</div>
+<!-- Events Container -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 525px; width: 1160px; height: 175px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<!-- Left Column (3 items) - WILL BE REPLACED BY MERGE SCRIPT -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 540px; width: 540px; height: 145px; z-index: 212;">
+{{LEFT_EVENTS}}
+</div>
+<!-- Vertical Separator -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 640px; top: 540px; width: 1px; height: 145px; background-color: #e5e7eb; z-index: 213;"></div>
+<!-- Right Column (4 items) - WILL BE REPLACED BY MERGE SCRIPT -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 660px; top: 540px; width: 540px; height: 145px; z-index: 212;">
+{{RIGHT_EVENTS}}
+</div>
+<!-- Page Number -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1247px; top: 690px; width: 13px; height: 15px; z-index: 236;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #9ca3af; text-align: right;">2</p>
+</div>
+<!-- Bottom Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 712px; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_35.png'); background-size: cover; z-index: 235;"></div>
+<script>
+        // Chart data - WILL BE REPLACED BY MERGE SCRIPT (7 days)
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        const data = [0, 0, 0, 0, 0, 0, 0];
+        const maxValue = Math.max(...data);
+        const maxIndex = data.indexOf(maxValue);
+        
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['{{DAY_1}}', '{{DAY_2}}', '{{DAY_3}}', '{{DAY_4}}', '{{DAY_5}}', '{{DAY_6}}', '{{DAY_7}}'],
+                datasets: [{
+                    label: 'Lượng thảo luận',
+                    data: data,
+                    borderColor: '#0045c4',
+                    backgroundColor: 'rgba(0, 69, 196, 0.1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: data.map((val, idx) => idx === maxIndex ? '#EC003F' : '#ffffff'),
+                    pointBorderColor: data.map((val, idx) => idx === maxIndex ? '#EC003F' : '#0045c4'),
+                    pointRadius: data.map((val, idx) => idx === maxIndex ? 6 : 4),
+                    pointHoverRadius: data.map((val, idx) => idx === maxIndex ? 6 : 4),
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        align: 'end',
+                        labels: {
+                            font: { family: 'Inter', size: 12 },
+                            color: '#4b5563',
+                            usePointStyle: false,
+                            boxWidth: 40,
+                            boxHeight: 3
+                        }
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    datalabels: {
+                        align: 'top',
+                        anchor: 'end',
+                        color: function(context) {
+                            return context.dataIndex === maxIndex ? '#EC003F' : '#374151';
+                        },
+                        font: function(context) {
+                            return {
+                                family: 'Inter',
+                                size: context.dataIndex === maxIndex ? 13 : 11,
+                                weight: 'bold'
+                            };
+                        },
+                        formatter: function(value) {
+                            return value.toLocaleString();
+                        },
+                        offset: 4
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f3f4f6' },
+                        ticks: { font: { family: 'Inter', size: 11 }, color: '#6b7280' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Inter', size: 11 }, color: '#374151' }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    </script>
+</div>
+</body>
+</html>

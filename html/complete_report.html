@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Báo cáo BIDV - Tuần 21/02/2026 → 28/02/2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #e5e7eb;
+        padding: 20px;
+    }
+    
+    .report-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .slide {
+        position: relative;
+        width: 1280px;
+        height: 720px;
+        background-color: #f5f7fa;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    
+    @media print {
+        body {
+            background-color: #ffffff;
+            padding: 0;
+        }
+        
+        .report-container {
+            gap: 0;
+        }
+        
+        .slide {
+            page-break-after: always;
+            box-shadow: none;
+            border-radius: 0;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="report-container" id="reportContainer">
+    <!-- Slides will be loaded here -->
+</div>
+
+<script>
+const slideFiles = [
+    'slide1.html',
+    'slide2.html',
+    'slide3.html',
+    'slide4.html',
+    'slide5.html',
+    'slide6.html',
+    'slide7.html',
+    'slide8.html',
+    'slide9.html',
+    'slide10.html',
+    'slide11.html',
+    'slide12.html',
+    'slide13.html',
+    'slide14.html',
+    'slide15.html',
+    'slide16.html'
+];
+
+async function loadAllSlides() {
+    const container = document.getElementById('reportContainer');
+    
+    for (let i = 0; i < slideFiles.length; i++) {
+        try {
+            const response = await fetch(slideFiles[i]);
+            if (!response.ok) {
+                console.warn(`Could not load ${slideFiles[i]}`);
+                continue;
+            }
+            
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Extract the slide container
+            const slideContent = doc.querySelector('.slide-container');
+            if (slideContent) {
+                slideContent.classList.add('slide');
+                slideContent.id = `slide-${i}`;
+                container.appendChild(slideContent);
+                
+                // Execute scripts in the slide
+                const scripts = slideContent.querySelectorAll('script');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    newScript.textContent = script.textContent;
+                    document.body.appendChild(newScript);
+                });
+            }
+        } catch (error) {
+            console.error(`Error loading ${slideFiles[i]}:`, error);
+        }
+    }
+}
+
+// Load all slides on page load
+window.addEventListener('DOMContentLoaded', loadAllSlides);
+</script>
+</body>
+</html>

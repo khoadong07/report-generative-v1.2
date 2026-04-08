@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentiment Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        .slide-container {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            background-color: #f5f7fa;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 720px; background-color: #f5f7fa; z-index: 0;"></div>
+<!-- Top Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_2.png'); background-size: cover; z-index: 202;"></div>
+<!-- Header Section -->
+<!-- Kompa.ai Logo -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 40px; width: 200px; height: 30px; z-index: 203;">
+<p style="margin: 0; font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: 700; color: #0045c4;">Kompa.ai</p>
+</div>
+<!-- Date Range -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 991px; top: 45px; width: 229px; height: 20px; z-index: 204; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; color: #6b7280;">21/02/2026 → 28/02/2026</p>
+</div>
+<!-- Main Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 80px; width: 1160px; height: 44px; z-index: 205;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 700; color: #111827;">PHÂN TÍCH SẮC THÁI ĐỀ CẬP CỦA BIDV</p>
+</div>
+<!-- Subtitle -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 130px; width: 1200px; height: 21px; z-index: 206;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 17.33px; color: #4b5563;">Phân tích chỉ số cảm xúc (Sentiment) và các chủ đề thảo luận chính</p>
+</div>
+<!-- Donut Chart Container -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 180px; width: 560px; height: 360px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); z-index: 200;"></div>
+<!-- Donut Chart Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 195px; width: 520px; height: 30px; z-index: 201;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: #111827;">Sức khỏe thương hiệu (NSR)</span></p>
+</div>
+
+<!-- Status Indicator Donut 1 (Tuần trước) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 90px; top: 235px; width: 180px; height: 70px; background-color: #f3f4f6; border-radius: 8px; z-index: 212;"></div>
+<div data-object="true" data-object-type="textbox" id="statusLastWeek" style="position: absolute; left: 100px; top: 242px; width: 160px; height: 60px; z-index: 213;">
+<p style="margin: 0 0 6px 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">Cấp độ:</p>
+<div id="badgeLastWeek" style="display: inline-block; background-color: #2A9D5C; color: #ffffff; padding: 4px 14px; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;">Tích cực</div>
+</div>
+<!-- Label Donut 1 (Tuần trước) -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 130px; top: 320px; width: 100px; height: 20px; z-index: 212; text-align: center;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: #4b5563;">Tuần trước</p>
+</div>
+
+<!-- Donut 1 (Last Week) -->
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 100px; top: 350px; width: 160px; height: 160px; z-index: 210;">
+<canvas id="donutLastWeek"></canvas>
+</div>
+<!-- Center Text Donut 1 -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 145px; top: 410px; width: 70px; height: 50px; z-index: 211; text-align: center;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">NSR</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 700; color: #111827;">55.9%</p>
+</div>
+<!-- Label Donut 2 (Tuần này) -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 410px; top: 320px; width: 100px; height: 20px; z-index: 212; text-align: center;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: #4b5563;">Tuần này</p>
+</div>
+<!-- Status Indicator Donut 2 (Tuần này) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 370px; top: 235px; width: 180px; height: 70px; background-color: #f3f4f6; border-radius: 8px; z-index: 212;"></div>
+<div data-object="true" data-object-type="textbox" id="statusThisWeek" style="position: absolute; left: 380px; top: 242px; width: 160px; height: 60px; z-index: 213;">
+<p style="margin: 0 0 6px 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">Cấp độ:</p>
+<div id="badgeThisWeek" style="display: inline-block; background-color: #2A9D5C; color: #ffffff; padding: 4px 14px; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;">Tích cực</div>
+<p style="margin: 6px 0 0 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">So với kỳ trước: <span style="color: #EC003F; font-weight: 600;">↓ 17.12%</span></p>
+</div>
+<!-- Donut 2 (This Week) -->
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 380px; top: 350px; width: 160px; height: 160px; z-index: 210;">
+<canvas id="donutThisWeek"></canvas>
+</div>
+<!-- Center Text Donut 2 -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 425px; top: 410px; width: 70px; height: 50px; z-index: 211; text-align: center;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">NSR</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 700; color: #0045c4;">38.5%</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 410px; top: 510px; width: 100px; height: 20px; z-index: 212; text-align: center;">
+</div>
+
+<!-- Right Chart Container (Stacked Bar) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 640px; top: 180px; width: 580px; height: 360px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); z-index: 200;"></div>
+<!-- Stacked Bar Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 660px; top: 195px; width: 400px; height: 20px; z-index: 201;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: #111827;">Phân bổ sắc thái theo Top 10 chủ đề chính</p>
+</div>
+<!-- Stacked Bar Chart -->
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 640px; top: 220px; width: 580px; height: 300px; z-index: 210;">
+<canvas id="stackedBarChart"></canvas>
+</div>
+<!-- Legend for Charts (below bar chart) -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 640px; top: 525px; width: 580px; height: 20px; z-index: 213; text-align: center;">
+<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+<div style="display: flex; align-items: center; gap: 5px;">
+<div style="width: 10px; height: 10px; background-color: #2A9D5C; border-radius: 50%;"></div>
+<span style="font-family: 'Inter', sans-serif; font-size: 11px; color: #4b5563;">Tích cực</span>
+</div>
+<div style="display: flex; align-items: center; gap: 5px;">
+<div style="width: 10px; height: 10px; background-color: #ADB5BD; border-radius: 50%;"></div>
+<span style="font-family: 'Inter', sans-serif; font-size: 11px; color: #4b5563;">Trung lập</span>
+</div>
+<div style="display: flex; align-items: center; gap: 5px;">
+<div style="width: 10px; height: 10px; background-color: #E63946; border-radius: 50%;"></div>
+<span style="font-family: 'Inter', sans-serif; font-size: 11px; color: #4b5563;">Tiêu cực</span>
+</div>
+</div>
+</div>
+<!-- Footer Section -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 550px; width: 1160px; height: 155px; background-color: #f3f4f6; border-radius: 8px; z-index: 100;"></div>
+<!-- Blue Vertical Bar -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 550px; width: 6px; height: 155px; background-color: #0045c4; border-top-left-radius: 8px; border-bottom-left-radius: 8px; z-index: 101;"></div>
+<!-- Footer Content -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 560px; width: 1120px; height: 140px; z-index: 233;">
+<p style="margin: 0 0 8px 0; font-family: 'Inter', sans-serif; font-size: 13.33px; font-weight: 700; color: #374151;">NHẬN ĐỊNH:</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #374151; line-height: 1.5; text-align: justify;">
+            Trong tuần từ 21/02/2026 đến 28/02/2026, các cuộc thảo luận về BIDV tập trung chủ yếu vào chủ đề "MS - Tin tức" và "MS - Keyword x3 value" với số lượng lượt nhắc đến cao nhất, nhưng sắc thái chủ yếu là trung lập, cho thấy thông tin được chia sẻ mang tính chất tường thuật hơn là đánh giá [<a href="https://www.tiktok.com/@andocapital/video/7610698792068844808" style="color: #0045c4; text-decoration: none;">URL</a>]. Chủ đề "Tài chính / Chứng khoán" cũng thu hút sự quan tâm, dù số lượng thấp hơn, với một vài ý kiến tiêu cực cho thấy lo ngại về tình hình thị trường [<a href="https://www.tiktok.com/@nguyentrungphucbds/video/7611371448829070613" style="color: #0045c4; text-decoration: none;">URL</a>]. Bên cạnh đó, các vấn đề liên quan đến dịch vụ ngân hàng như giới hạn rút tiền ATM cũng được đề cập, thể hiện sự quan tâm của người dùng đến trải nghiệm thực tế khi sử dụng dịch vụ của BIDV [<a href="https://www.tiktok.com/@phu_nhadat/video/7610418439609421077" style="color: #0045c4; text-decoration: none;">URL</a>]. Một số nội dung mang tính chất tích cực, như chia sẻ niềm vui nhận lương, cũng xuất hiện, góp phần tạo nên bức tranh đa chiều về cảm xúc của khách hàng đối với thương hiệu [<a href="https://www.tiktok.com/@toitenladanhs/video/7611179320635084039" style="color: #0045c4; text-decoration: none;">URL</a>]. Đồng thời, cảnh báo về an ninh tài khoản ngân hàng cũng được lan truyền, cho thấy sự cần thiết phải nâng cao nhận thức về bảo mật trong giao dịch trực tuyến của BIDV [<a href="https://www.tiktok.com/@kienthuckinhte28/video/7611364539556203783" style="color: #0045c4; text-decoration: none;">URL</a>].
+        </p>
+</div>
+<!-- Page Number -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1247px; top: 690px; width: 13px; height: 15px; z-index: 236;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #9ca3af; text-align: right;">6</p>
+</div>
+<!-- Bottom Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 712px; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_35.png'); background-size: cover; z-index: 235;"></div>
+<script>
+        // NSR values
+        const nsrLastWeek = 55.9;
+        const nsrThisWeek = 38.5;
+
+        // Function to determine sentiment status based on NSR
+        function getSentimentStatus(nsr) {
+            if (nsr > 0) {
+                return {
+                    label: 'Tích cực',
+                    color: '#2A9D5C'  // Green
+                };
+            } else if (nsr < 0) {
+                return {
+                    label: 'Tiêu cực',
+                    color: '#E63946'  // Red
+                };
+            } else {
+                return {
+                    label: 'Trung lập',
+                    color: '#6B7280'  // Gray
+                };
+            }
+        }
+
+        // Update status badges
+        const statusLastWeek = getSentimentStatus(nsrLastWeek);
+        const statusThisWeek = getSentimentStatus(nsrThisWeek);
+
+        document.getElementById('badgeLastWeek').textContent = statusLastWeek.label;
+        document.getElementById('badgeLastWeek').style.backgroundColor = statusLastWeek.color;
+
+        document.getElementById('badgeThisWeek').textContent = statusThisWeek.label;
+        document.getElementById('badgeThisWeek').style.backgroundColor = statusThisWeek.color;
+
+        // Donut Chart Last Week
+        const ctxDonutLast = document.getElementById('donutLastWeek').getContext('2d');
+        new Chart(ctxDonutLast, {
+            type: 'doughnut',
+            data: {
+                labels: ['Trung lập', 'Tích cực', 'Tiêu cực'],
+                datasets: [{
+                    data: [90.7, 7.3, 2.1],
+                    backgroundColor: ['#6B7280', '#2A9D5C', '#E63946'],
+                    borderWidth: 0,
+                    hoverOffset: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                animation: {
+                    duration: 0
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false },
+                    datalabels: {
+                        color: '#ffffff',
+                        font: {
+                            family: 'Inter',
+                            weight: 'bold',
+                            size: 11
+                        },
+                        formatter: function(value, context) {
+                            // Calculate percentage from raw counts
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = (value / total * 100);
+                            // Only show if >= 5%
+                            if (percentage >= 5) {
+                                return Math.round(percentage) + '%';
+                            }
+                            return '';
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Donut Chart This Week
+        const ctxDonutThis = document.getElementById('donutThisWeek').getContext('2d');
+        new Chart(ctxDonutThis, {
+            type: 'doughnut',
+            data: {
+                labels: ['Trung lập', 'Tích cực', 'Tiêu cực'],
+                datasets: [{
+                    data: [91.6, 5.8, 2.6],
+                    backgroundColor: ['#6B7280', '#2A9D5C', '#E63946'],
+                    borderWidth: 0,
+                    hoverOffset: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                animation: {
+                    duration: 0
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false },
+                    datalabels: {
+                        color: '#ffffff',
+                        font: {
+                            family: 'Inter',
+                            weight: 'bold',
+                            size: 11
+                        },
+                        formatter: function(value, context) {
+                            // Calculate percentage from raw counts
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = (value / total * 100);
+                            // Only show if >= 5%
+                            if (percentage >= 5) {
+                                return Math.round(percentage) + '%';
+                            }
+                            return '';
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Stacked Bar Chart - Raw counts for tooltip
+        const rawCounts = {
+            positive: [49, 49, 8, 10, 19, 6, 1, 6, 41, 1],
+            neutral: [604, 604, 601, 453, 382, 181, 29, 59, 7, 41],
+            negative: [0, 0, 0, 2, 0, 0, 52, 8, 0, 1]
+        };
+        
+        // Calculate percentages for labels on bars
+        const numTopics = rawCounts.positive.length;
+        const percentages = {
+            positive: [],
+            neutral: [],
+            negative: []
+        };
+        
+        for (let i = 0; i < numTopics; i++) {
+            const total = rawCounts.positive[i] + rawCounts.neutral[i] + rawCounts.negative[i];
+            if (total > 0) {
+                percentages.positive.push(parseFloat(((rawCounts.positive[i] / total) * 100).toFixed(1)));
+                percentages.neutral.push(parseFloat(((rawCounts.neutral[i] / total) * 100).toFixed(1)));
+                percentages.negative.push(parseFloat(((rawCounts.negative[i] / total) * 100).toFixed(1)));
+            } else {
+                percentages.positive.push(0);
+                percentages.neutral.push(0);
+                percentages.negative.push(0);
+            }
+        }
+        
+        // Stacked Bar Chart
+        const ctxStacked = document.getElementById('stackedBarChart').getContext('2d');
+        new Chart(ctxStacked, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'MS - Tin tức', 
+                    'MS - Keyword x3', 
+                    'MS - Nhắc đến', 
+                    'TC / Chứng khoán', 
+                    'MS - IR', 
+                    'TC/ CK (Viết tắt)', 
+                    'App & NH số', 
+                    'KM & Ưu đãi', 
+                    'MS - Sở Hữu', 
+                    'HĐ thương hiệu'
+                ],
+                datasets: [
+                    {
+                        label: 'Tích cực',
+                        data: rawCounts.positive,
+                        backgroundColor: '#2A9D5C',
+                        barThickness: 20
+                    },
+                    {
+                        label: 'Trung lập',
+                        data: rawCounts.neutral,
+                        backgroundColor: '#ADB5BD',
+                        barThickness: 20
+                    },
+                    {
+                        label: 'Tiêu cực',
+                        data: rawCounts.negative,
+                        backgroundColor: '#E63946',
+                        barThickness: 20
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 0
+                },
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 20,
+                        top: 10,
+                        bottom: 10
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { color: '#f3f4f6' },
+                        ticks: { 
+                            font: { family: 'Inter', size: 11 }, 
+                            color: '#6b7280'
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: { 
+                            font: { 
+                                family: 'Inter', 
+                                size: 10,
+                                weight: '600'
+                            }, 
+                            color: '#111827',
+                            autoSkip: false,
+                            padding: 8
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { 
+                        display: false 
+                    },
+                    tooltip: {
+                        backgroundColor: '#ffffff',
+                        titleColor: '#111827',
+                        bodyColor: '#4b5563',
+                        borderColor: '#e5e7eb',
+                        borderWidth: 1,
+                        padding: 10,
+                        titleFont: { family: 'Inter', size: 12 },
+                        bodyFont: { family: 'Inter', size: 12 },
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.dataset.label || '';
+                                const percentage = context.parsed.x.toFixed(1);
+                                const dataIndex = context.dataIndex;
+                                
+                                // Get raw count based on dataset
+                                let count = 0;
+                                if (label === 'Tích cực') {
+                                    count = rawCounts.positive[dataIndex];
+                                } else if (label === 'Trung lập') {
+                                    count = rawCounts.neutral[dataIndex];
+                                } else if (label === 'Tiêu cực') {
+                                    count = rawCounts.negative[dataIndex];
+                                }
+                                
+                                return `${label}: ${count} (${percentage}%)`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: function(context) {
+                            // Total label at the end should be dark
+                            if (context.datasetIndex === context.chart.data.datasets.length - 1) {
+                                return '#111827';
+                            }
+                            // Hide percentage labels on segments
+                            return 'transparent';
+                        },
+                        font: {
+                            family: 'Inter',
+                            size: 10,
+                            weight: '600'
+                        },
+                        formatter: function(value, context) {
+                            const dataIndex = context.dataIndex;
+                            const datasetIndex = context.datasetIndex;
+                            
+                            // Show total only on the last dataset (at the end of bar)
+                            if (datasetIndex === context.chart.data.datasets.length - 1) {
+                                const total = rawCounts.positive[dataIndex] + 
+                                             rawCounts.neutral[dataIndex] + 
+                                             rawCounts.negative[dataIndex];
+                                return total;
+                            }
+                            
+                            // Hide percentage labels on segments
+                            return '';
+                        },
+                        anchor: function(context) {
+                            // Total at the end of bar
+                            if (context.datasetIndex === context.chart.data.datasets.length - 1) {
+                                return 'end';
+                            }
+                            return 'center';
+                        },
+                        align: function(context) {
+                            // Total at the end of bar
+                            if (context.datasetIndex === context.chart.data.datasets.length - 1) {
+                                return 'end';
+                            }
+                            return 'center';
+                        },
+                        offset: function(context) {
+                            // Add offset for total label
+                            if (context.datasetIndex === context.chart.data.datasets.length - 1) {
+                                return 4;
+                            }
+                            return 0;
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    </script>
+</div>
+</body>
+</html>

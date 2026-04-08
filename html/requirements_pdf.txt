@@ -1,0 +1,11 @@
+# Requirements for PDF export
+
+# Option 1: Playwright (recommended - better rendering)
+playwright>=1.40.0
+
+# Option 2: WeasyPrint (simpler, no browser needed)
+weasyprint>=60.0
+
+# HTML parsing
+beautifulsoup4>=4.12.0
+lxml>=4.9.0

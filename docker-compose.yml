@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  streamlit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: weekly-report-streamlit
+    ports:
+      - "13333:13333"
+    volumes:
+      # Mount code for development (optional - comment out for production)
+      - .:/app
+      # Persist output files
+      - ./output:/app/output
+      # Mount demo data
+      - ./demo:/app/demo
+    environment:
+      # API credentials from .env file
+      - API_KEY=${API_KEY}
+      - BASE_URL=${BASE_URL}
+      # Streamlit settings
+      - STREAMLIT_SERVER_PORT=13333
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - weekly-report-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:13333/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  weekly-report-network:
+    driver: bridge
+
+volumes:
+  output-data:
+    driver: local

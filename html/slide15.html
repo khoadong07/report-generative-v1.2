@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentiment by Topic and Summary Table</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        .slide-container {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            background-color: #f5f7fa;
+            overflow: hidden;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 10px;
+        }
+        th {
+            background-color: #0045C4;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 4px 6px;
+            text-align: left;
+            border: 1px solid #003bb3;
+            font-size: 10px;
+        }
+        td {
+            padding: 3px 6px;
+            border-bottom: 1px solid #E5E7EB;
+            border-right: 1px solid #E5E7EB;
+            border-left: 1px solid #E5E7EB;
+            color: #374151;
+            vertical-align: middle;
+            font-size: 10px;
+            line-height: 1.3;
+        }
+        tr:nth-child(even) {
+            background-color: #F9FAFB;
+        }
+        tr:nth-child(odd) {
+            background-color: #FFFFFF;
+        }
+        .nsr-positive { color: #2A9D5C; font-weight: 700; }
+        .nsr-negative { color: #E63946; font-weight: 700; }
+        .nsr-neutral { color: #6B7280; font-weight: 700; }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 720px; background-color: #f5f7fa; z-index: 0;"></div>
+<!-- Top Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_2.png'); background-size: cover; z-index: 202;"></div>
+<!-- Header Section -->
+<!-- Kompa.ai Logo -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 40px; width: 200px; height: 30px; z-index: 203;">
+<p style="margin: 0; font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: 700; color: #0045c4;">Kompa.ai</p>
+</div>
+<!-- Date Range -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 991px; top: 45px; width: 229px; height: 20px; z-index: 204; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; color: #6b7280; white-space: nowrap;">21/02/2026 → 28/02/2026</p>
+</div>
+<!-- Main Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 80px; width: 1160px; height: 44px; z-index: 205;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 700; color: #111827;">PHÂN TÍCH SẮC THÁI THẢO LUẬN CỦA CÁC THƯƠNG HIỆU</p>
+</div>
+<!-- Insight Box -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 135px; width: 1160px; height: 125px; background-color: #f3f4f6; border-radius: 8px; z-index: 100;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 135px; width: 6px; height: 125px; background-color: #0045c4; border-top-left-radius: 8px; border-bottom-left-radius: 8px; z-index: 101;"></div>
+<!-- Increased height to prevent overflow issues -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 145px; width: 1120px; height: 120px; z-index: 233;">
+<p style="margin: 0 0 5px 0; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #374151;">NHẬN ĐỊNH:</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #374151; line-height: 1.5; text-align: justify;">
+                {{INSIGHT}}
+            </p>
+</div>
+<!-- Stacked Bar Chart Section (Top) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 275px; width: 1160px; height: 220px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); z-index: 200;"></div>
+<!-- Chart Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 290px; width: 1120px; height: 25px; z-index: 201;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: #111827;">Tỷ trọng sentiment theo Topic</p>
+</div>
+<!-- Stacked Bar Chart -->
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 80px; top: 320px; width: 1120px; height: 140px; z-index: 210;">
+<canvas id="sentimentTopicChart"></canvas>
+</div>
+<!-- Chart Legend (Custom) - Moved down slightly and widened -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 470px; top: 475px; width: 340px; height: 20px; z-index: 211;">
+<div style="display: flex; justify-content: center; gap: 20px;">
+<div style="display: flex; align-items: center; gap: 6px;">
+<div style="width: 12px; height: 12px; background-color: #2A9D5C; border-radius: 2px;"></div>
+<span style="font-family: 'Inter', sans-serif; font-size: 12px; color: #4b5563;">Tích cực</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px;">
+<div style="width: 12px; height: 12px; background-color: #ADB5BD; border-radius: 2px;"></div>
+<span style="font-family: 'Inter', sans-serif; font-size: 12px; color: #4b5563;">Trung lập</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px;">
+<div style="width: 12px; height: 12px; background-color: #E63946; border-radius: 2px;"></div>
+<span style="font-family: 'Inter', sans-serif; font-size: 12px; color: #4b5563;">Tiêu cực</span>
+</div>
+</div>
+</div>
+<!-- Summary Table Section (Bottom) -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 510px; width: 1160px; height: 160px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); z-index: 200;"></div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 520px; width: 1120px; height: 140px; z-index: 203;">
+<table>
+<thead>
+<tr>
+<th style="width: 12%;">Thương hiệu</th>
+<th style="width: 7%; text-align: center;">NSR tuần trước</th>
+<th style="width: 7%; text-align: center;">NSR tuần này</th>
+<th style="width: 7%; text-align: center;">Biến động</th>
+<th style="width: 33.5%;">Bài đăng tích cực</th>
+<th style="width: 33.5%;">Bài đăng tiêu cực</th>
+</tr>
+</thead>
+<tbody>
+<!-- Table rows will be dynamically generated -->
+</tbody>
+</table>
+</div>
+<!-- Footer Page Number -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1247px; top: 690px; width: 13px; height: 15px; z-index: 236;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #9ca3af; text-align: right;">15</p>
+</div>
+<!-- Bottom Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 712px; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_35.png'); background-size: cover; z-index: 235;"></div>
+<script>
+            // Register custom plugin for top labels
+            Chart.register({
+                id: 'topLabels',
+                afterDatasetsDraw(chart) {
+                    const ctx = chart.ctx;
+                    ctx.save();
+                    
+                    const totals = [];
+                    
+                    chart.data.datasets[chart.data.datasets.length - 1].data.forEach((value, index) => {
+                        const meta = chart.getDatasetMeta(chart.data.datasets.length - 1);
+                        const bar = meta.data[index];
+                        
+                        ctx.fillStyle = '#111827';
+                        ctx.font = 'bold 13px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillText(totals[index].toLocaleString(), bar.x, bar.y - 5);
+                    });
+                    
+                    ctx.restore();
+                }
+            });
+
+            const ctxSentiment = document.getElementById('sentimentTopicChart').getContext('2d');
+            
+            new Chart(ctxSentiment, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                options: {
+                    layout: {
+                        padding: {
+                            left: 10,
+                            right: 10,
+                            top: 20,
+                            bottom: 10
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: 'Inter', size: 13, weight: '600' },
+                                color: '#374151',
+                                padding: 5
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                            grid: { color: '#f3f4f6', borderDash: [5, 5] },
+                            ticks: {
+                                font: { family: 'Inter', size: 11 },
+                                color: '#6b7280',
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#ffffff',
+                            titleColor: '#111827',
+                            bodyColor: '#4b5563',
+                            borderColor: '#e5e7eb',
+                            borderWidth: 1,
+                            titleFont: { family: 'Inter', size: 13 },
+                            bodyFont: { family: 'Inter', size: 12 },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y.toLocaleString();
+                                    }
+                                    return label;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
+        </script>
+</div>
+</body>
+</html>
+
+
+

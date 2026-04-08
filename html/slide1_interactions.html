@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brand Overview - Interactions Mode</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        .slide-container {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            background-color: #f5f7fa;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 720px; background-color: #f5f7fa; z-index: 0;"></div>
+<!-- Top Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 0; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_2.png'); background-size: cover; z-index: 202;"></div>
+<!-- Header Section -->
+<!-- Kompa.ai Logo -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 40px; width: 200px; height: 30px; z-index: 203;">
+<p style="margin: 0; font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: 700; color: #0045c4;">Kompa.ai</p>
+</div>
+<!-- Date Range -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 991px; top: 45px; width: 229px; height: 20px; z-index: 204; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px; color: #6b7280;">{{DATE_RANGE}}</p>
+</div>
+<!-- Main Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 80px; width: 900px; height: 44px; z-index: 205;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 700; color: #111827;">{{TITLE}}</p>
+</div>
+<!-- Subtitle -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 60px; top: 130px; width: 531px; height: 21px; z-index: 206;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 17.33px; color: #4b5563;">{{SUBTITLE}}</p>
+</div>
+
+<!-- Left Content: Chart Card -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 180px; width: 420px; height: 342px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<!-- Chart Title -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 200px; width: 380px; height: 21px; z-index: 208;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #111827;">So sánh 4 tuần gần nhất</p>
+</div>
+<!-- Chart Container -->
+<div data-object="true" data-object-type="chart" style="position: absolute; left: 80px; top: 235px; width: 380px; height: 270px; z-index: 209;">
+<canvas id="barChart"></canvas>
+</div>
+
+<!-- Right Content: 6 Stats Cards (2 columns x 3 rows) -->
+<!-- Row 1: Card 1 & 2 -->
+<!-- Card 1: Tổng đề cập -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 510px; top: 180px; width: 355px; height: 90px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 525px; top: 195px; width: 50px; height: 50px; background-color: #ebf1ff; border-radius: 50%; z-index: 211;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 537px; top: 207px; width: 26px; height: 26px; z-index: 212; display: flex; justify-content: center; align-items: center; color: #0045c4;">
+<svg fill="currentColor" height="26" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 590px; top: 192px; width: 180px; height: 60px; z-index: 213;">
+<p style="margin: 0 0 2px 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">Tổng đề cập</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #111827;">{{METRIC_1_VALUE}}</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 780px; top: 197px; width: 70px; height: 50px; z-index: 214; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #00c055;">{{METRIC_1_CHANGE}}</p>
+<p style="margin: 2px 0 0 0; font-family: 'Inter', sans-serif; font-size: 9px; color: #6b7280;">vs tuần trước</p>
+</div>
+
+<!-- Card 2: Tổng tương tác -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 885px; top: 180px; width: 355px; height: 90px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 900px; top: 195px; width: 50px; height: 50px; background-color: #ebf1ff; border-radius: 50%; z-index: 211;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 912px; top: 207px; width: 26px; height: 26px; z-index: 212; display: flex; justify-content: center; align-items: center; color: #0045c4;">
+<svg fill="currentColor" height="26" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"></path></svg>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 965px; top: 192px; width: 180px; height: 60px; z-index: 213;">
+<p style="margin: 0 0 2px 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">Tổng tương tác</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #111827;">{{METRIC_2_VALUE}}</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1155px; top: 197px; width: 70px; height: 50px; z-index: 214; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #00c055;">{{METRIC_2_CHANGE}}</p>
+<p style="margin: 2px 0 0 0; font-family: 'Inter', sans-serif; font-size: 9px; color: #6b7280;">vs tuần trước</p>
+</div>
+
+<!-- Row 2: Card 3 & 4 -->
+<!-- Card 3: Tổng lượt xem -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 510px; top: 285px; width: 355px; height: 90px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 525px; top: 300px; width: 50px; height: 50px; background-color: #ebf1ff; border-radius: 50%; z-index: 211;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 537px; top: 312px; width: 26px; height: 26px; z-index: 212; display: flex; justify-content: center; align-items: center; color: #0045c4;">
+<svg fill="currentColor" height="26" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 590px; top: 297px; width: 180px; height: 60px; z-index: 213;">
+<p style="margin: 0 0 2px 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">Tổng lượt xem</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #111827;">{{METRIC_3_VALUE}}</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 780px; top: 302px; width: 70px; height: 50px; z-index: 214; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #00c055;">{{METRIC_3_CHANGE}}</p>
+<p style="margin: 2px 0 0 0; font-family: 'Inter', sans-serif; font-size: 9px; color: #6b7280;">vs tuần trước</p>
+</div>
+
+<!-- Card 4: Lượt reactions -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 885px; top: 285px; width: 355px; height: 90px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 900px; top: 300px; width: 50px; height: 50px; background-color: #ebf1ff; border-radius: 50%; z-index: 211;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 912px; top: 312px; width: 26px; height: 26px; z-index: 212; display: flex; justify-content: center; align-items: center; color: #0045c4;">
+<svg fill="currentColor" height="26" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 965px; top: 297px; width: 180px; height: 60px; z-index: 213;">
+<p style="margin: 0 0 2px 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">Lượt reactions</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #111827;">{{METRIC_4_VALUE}}</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1155px; top: 302px; width: 70px; height: 50px; z-index: 214; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #00c055;">{{METRIC_4_CHANGE}}</p>
+<p style="margin: 2px 0 0 0; font-family: 'Inter', sans-serif; font-size: 9px; color: #6b7280;">vs tuần trước</p>
+</div>
+
+<!-- Row 3: Card 5 & 6 -->
+<!-- Card 5: Lượt chia sẻ -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 510px; top: 390px; width: 355px; height: 90px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 525px; top: 405px; width: 50px; height: 50px; background-color: #ebf1ff; border-radius: 50%; z-index: 211;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 537px; top: 417px; width: 26px; height: 26px; z-index: 212; display: flex; justify-content: center; align-items: center; color: #0045c4;">
+<svg fill="currentColor" height="26" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"></path></svg>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 590px; top: 402px; width: 180px; height: 60px; z-index: 213;">
+<p style="margin: 0 0 2px 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">Lượt chia sẻ</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #111827;">{{METRIC_5_VALUE}}</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 780px; top: 407px; width: 70px; height: 50px; z-index: 214; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #00c055;">{{METRIC_5_CHANGE}}</p>
+<p style="margin: 2px 0 0 0; font-family: 'Inter', sans-serif; font-size: 9px; color: #6b7280;">vs tuần trước</p>
+</div>
+
+<!-- Card 6: Lượt bình luận -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 885px; top: 390px; width: 355px; height: 90px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 200;"></div>
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 900px; top: 405px; width: 50px; height: 50px; background-color: #ebf1ff; border-radius: 50%; z-index: 211;"></div>
+<div data-object="true" data-object-type="icon" style="position: absolute; left: 912px; top: 417px; width: 26px; height: 26px; z-index: 212; display: flex; justify-content: center; align-items: center; color: #0045c4;">
+<svg fill="currentColor" height="26" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path></svg>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 965px; top: 402px; width: 180px; height: 60px; z-index: 213;">
+<p style="margin: 0 0 2px 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">Lượt bình luận</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #111827;">{{METRIC_6_VALUE}}</p>
+</div>
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1155px; top: 407px; width: 70px; height: 50px; z-index: 214; text-align: right;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #ec003f;">{{METRIC_6_CHANGE}}</p>
+<p style="margin: 2px 0 0 0; font-family: 'Inter', sans-serif; font-size: 9px; color: #6b7280;">vs tuần trước</p>
+</div>
+
+<!-- Footer Section -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 540px; width: 1166px; height: 155px; background-color: #f3f4f6; border-radius: 8px; z-index: 100;"></div>
+<!-- Blue Vertical Bar -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 60px; top: 540px; width: 6px; height: 155px; background-color: #0045c4; border-top-left-radius: 8px; border-bottom-left-radius: 8px; z-index: 101;"></div>
+<!-- Footer Content -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: 550px; width: 1120px; height: 135px; z-index: 233;">
+<p style="margin: 0 0 8px 0; font-family: 'Inter', sans-serif; font-size: 13.33px; font-weight: 700; color: #374151;">NHẬN ĐỊNH:</p>
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #374151; line-height: 1.5; text-align: justify;">
+            {{INSIGHT}}
+        </p>
+</div>
+<!-- Page Number -->
+<div data-object="true" data-object-type="textbox" style="position: absolute; left: 1247px; top: 690px; width: 13px; height: 15px; z-index: 236;">
+<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #9ca3af; text-align: right;">1</p>
+</div>
+<!-- Bottom Strip -->
+<div data-object="true" data-object-type="shape" style="position: absolute; left: 0; top: 712px; width: 1280px; height: 8px; background-image: url('https://page.gensparksite.com/template_extract/9ff990cd-818e-4539-ac15-16bd1a0cb4ed/slide_0/slide_image_35.png'); background-size: cover; z-index: 235;"></div>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script>
+        // Chart data
+        const ctx = document.getElementById('barChart').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['{{WEEK_LABEL_1}}', '{{WEEK_LABEL_2}}', '{{WEEK_LABEL_3}}', '{{WEEK_LABEL_4}}'],
+                datasets: [{
+                    label: 'Lượt đề cập',
+                    data: [0, 0, 0, 0],
+                    backgroundColor: [
+                        '#e0e7ff',
+                        '#e0e7ff',
+                        '#e0e7ff',
+                        '#0045c4'
+                    ],
+                    borderRadius: 4,
+                    barThickness: 60
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                layout: {
+                    padding: {
+                        top: 10
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: '#374151',
+                        font: {
+                            family: 'Inter',
+                            size: 11,
+                            weight: 'bold'
+                        },
+                        formatter: function(value) {
+                            return value.toLocaleString();
+                        },
+                        offset: 4
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f3f4f6'
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter',
+                                size: 10
+                            },
+                            color: '#6b7280'
+                        },
+                        afterDataLimits: function(axis) {
+                            axis.max = axis.max * 1.15;
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter',
+                                size: 10
+                            },
+                            color: '#374151'
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    </script>
+</div>
+</body>
+</html>

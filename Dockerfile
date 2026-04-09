@@ -4,7 +4,7 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies for weasyprint (PDF generation)
+# Install system dependencies for weasyprint (PDF generation) and Playwright
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpango-1.0-0 \
@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     shared-mime-info \
     curl \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
@@ -25,6 +26,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir \
     streamlit==1.31.0 \
     weasyprint==60.2
+
+# Install Playwright browsers (Chromium)
+RUN playwright install --with-deps chromium
 
 # Copy application code
 COPY . .

@@ -680,7 +680,7 @@ class SlideHTMLMerger:
         left_html = ""
         for i, (date, text) in enumerate(left_events):
             margin = "12px" if i < len(left_events) - 1 else "0"
-            left_html += f'''<div style="margin-bottom: {margin}; font-family: 'Inter', sans-serif; font-size: 12px; color: #374151;">
+            left_html += f'''<div style="margin-bottom: {margin}; font-family: 'Product Sans', sans-serif; font-size: 12px; color: #374151;">
 <span style="font-weight: 700; color: #0045c4; display: inline-block; width: 80px;">{date}</span>
 <span style="color: #4b5563;">{text}</span>
 </div>
@@ -690,7 +690,7 @@ class SlideHTMLMerger:
         right_html = ""
         for i, (date, text) in enumerate(right_events):
             margin = "8px" if i < len(right_events) - 1 else "0"
-            right_html += f'''<div style="margin-bottom: {margin}; font-family: 'Inter', sans-serif; font-size: 12px; color: #374151;">
+            right_html += f'''<div style="margin-bottom: {margin}; font-family: 'Product Sans', sans-serif; font-size: 12px; color: #374151;">
 <span style="font-weight: 700; color: #0045c4; display: inline-block; width: 80px;">{date}</span>
 <span style="color: #4b5563;">{text}</span>
 </div>
@@ -746,7 +746,7 @@ class SlideHTMLMerger:
             
             legend_html += f'''<div style="margin-bottom: 12px; display: flex; align-items: center;">
 <span style="width: 12px; height: 12px; background-color: {color}; border-radius: 2px; margin-right: 8px;"></span>
-<span style="font-family: 'Inter', sans-serif; font-size: 13px; color: #374151;">{channel_name}</span>
+<span style="font-family: 'Product Sans', sans-serif; font-size: 13px; color: #374151;">{channel_name}</span>
 </div>
 '''
         
@@ -793,35 +793,35 @@ class SlideHTMLMerger:
                 
                 html += f'''<!-- Table Row {i} -->
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: {top_pos}px; width: 60px; height: 20px; z-index: 205; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{row["stt"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{row["stt"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 180px; top: {top_pos}px; width: 500px; height: 20px; z-index: 206;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #111827;">{row["source_name"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #111827;">{row["source_name"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 720px; top: {top_pos}px; width: 120px; height: 20px; z-index: 207; text-align: right;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4;">{value:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4;">{value:,}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 860px; top: {top_pos}px; width: 100px; height: 20px; z-index: 208; text-align: right;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{reactions:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{reactions:,}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 980px; top: {top_pos}px; width: 100px; height: 20px; z-index: 209; text-align: right;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{shares:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{shares:,}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 1100px; top: {top_pos}px; width: 100px; height: 20px; z-index: 210; text-align: right;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{comments:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{comments:,}</p>
 </div>
 '''
             else:
                 # Use regular template layout (3 columns)
                 html += f'''<!-- Table Row {i} -->
 <div style="position: absolute; left: 80px; top: {top_pos}px; width: 60px; height: 20px; z-index: 205; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{row["stt"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{row["stt"]}</p>
 </div>
 <div style="position: absolute; left: 180px; top: {top_pos}px; width: 700px; height: 20px; z-index: 206;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #111827;">{row["source_name"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #111827;">{row["source_name"]}</p>
 </div>
 <div style="position: absolute; left: 920px; top: {top_pos}px; width: 260px; height: 20px; z-index: 207; text-align: right;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4;">{value:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4;">{value:,}</p>
 </div>
 '''
             
@@ -864,53 +864,53 @@ class SlideHTMLMerger:
                 
                 html += f'''<!-- Table Row {i} -->
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: {top_pos}px; width: 50px; height: 35px; z-index: 205; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{row["stt"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{row["stt"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 150px; top: {top_pos}px; width: 320px; height: 35px; z-index: 206;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 490px; top: {top_pos}px; width: 80px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #4b5563;">{pub_date}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #4b5563;">{pub_date}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 590px; top: {top_pos}px; width: 80px; height: 35px; z-index: 208; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #4b5563;">{row["channel"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #4b5563;">{row["channel"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 690px; top: {top_pos}px; width: 140px; height: 35px; z-index: 209;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 850px; top: {top_pos}px; width: 80px; height: 35px; z-index: 210; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{reactions:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{reactions:,}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 950px; top: {top_pos}px; width: 80px; height: 35px; z-index: 211; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{shares:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{shares:,}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 1050px; top: {top_pos}px; width: 80px; height: 35px; z-index: 212; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{comments:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{comments:,}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 1150px; top: {top_pos}px; width: 50px; height: 35px; z-index: 213; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px;"><a href="{row["url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Link</a></p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px;"><a href="{row["url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Link</a></p>
 </div>
 '''
             else:
                 # Use regular template layout (6 columns)
                 html += f'''<!-- Table Row {i} -->
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: {top_pos}px; width: 50px; height: 35px; z-index: 205; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280;">{row["stt"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #6b7280;">{row["stt"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 150px; top: {top_pos}px; width: 420px; height: 35px; z-index: 206;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 590px; top: {top_pos}px; width: 100px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563;">{pub_date}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563;">{pub_date}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 710px; top: {top_pos}px; width: 100px; height: 35px; z-index: 208; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563;">{row["channel"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563;">{row["channel"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 830px; top: {top_pos}px; width: 180px; height: 35px; z-index: 209;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 1030px; top: {top_pos}px; width: 170px; height: 35px; z-index: 210; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px;"><a href="{row["url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Xem chi tiết</a></p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px;"><a href="{row["url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Xem chi tiết</a></p>
 </div>
 '''
             
@@ -940,25 +940,25 @@ class SlideHTMLMerger:
             
             html += f'''<!-- Table Row {i} -->
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 70px; top: {top_pos}px; width: 40px; height: 35px; z-index: 205; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280;">{row["stt"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #6b7280;">{row["stt"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 120px; top: {top_pos}px; width: 500px; height: 35px; z-index: 206;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 630px; top: {top_pos}px; width: 90px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563;">{pub_date}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563;">{pub_date}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 730px; top: {top_pos}px; width: 80px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563;">{row["channel"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563;">{row["channel"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 820px; top: {top_pos}px; width: 140px; height: 35px; z-index: 207;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 970px; top: {top_pos}px; width: 80px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #00C055;">{row["positive_comments"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: #00C055;">{row["positive_comments"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 1060px; top: {top_pos}px; width: 140px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px;"><a href="{row["url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Xem chi tiết</a></p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px;"><a href="{row["url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Xem chi tiết</a></p>
 </div>
 '''
             # Separator
@@ -987,25 +987,25 @@ class SlideHTMLMerger:
             
             html += f'''<!-- Table Row {i} -->
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 70px; top: {top_pos}px; width: 40px; height: 35px; z-index: 205; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280;">{row["stt"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #6b7280;">{row["stt"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 120px; top: {top_pos}px; width: 500px; height: 35px; z-index: 206;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 630px; top: {top_pos}px; width: 90px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563;">{pub_date}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563;">{pub_date}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 730px; top: {top_pos}px; width: 80px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563;">{row["channel"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563;">{row["channel"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 820px; top: {top_pos}px; width: 140px; height: 35px; z-index: 207;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 970px; top: {top_pos}px; width: 80px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #EC003F;">{row["negative_comments"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: #EC003F;">{row["negative_comments"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 1060px; top: {top_pos}px; width: 140px; height: 35px; z-index: 207; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px;"><a href="{row["url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Xem chi tiết</a></p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px;"><a href="{row["url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Xem chi tiết</a></p>
 </div>
 '''
             # Separator
@@ -1266,14 +1266,14 @@ class SlideHTMLMerger:
             html += f'''
 <div style="padding: 12px 0; {border_style}">
     <div style="display: flex; align-items: center; margin-bottom: 6px;">
-        <span style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4; margin-right: 8px;">{i}.</span>
-        <span style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #111827;">{topic_name}</span>
-        <span style="font-family: 'Inter', sans-serif; font-size: 12px; color: #6b7280; margin-left: auto;">({total_mentions:,} lượt)</span>
+        <span style="font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4; margin-right: 8px;">{i}.</span>
+        <span style="font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: #111827;">{topic_name}</span>
+        <span style="font-family: 'Product Sans', sans-serif; font-size: 12px; color: #6b7280; margin-left: auto;">({total_mentions:,} lượt)</span>
     </div>
-    <p style="margin: 0 0 6px 0; font-family: 'Inter', sans-serif; font-size: 12px; color: #4b5563; line-height: 1.4;">{post_text}</p>
+    <p style="margin: 0 0 6px 0; font-family: 'Product Sans', sans-serif; font-size: 12px; color: #4b5563; line-height: 1.4;">{post_text}</p>
     <div style="display: flex; align-items: center; justify-content: space-between;">
-        <span style="font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280;">💬 {comment_count:,} bình luận</span>
-        <a href="{url}" target="_blank" style="font-family: 'Inter', sans-serif; font-size: 11px; color: #0045c4; text-decoration: none;">Xem chi tiết →</a>
+        <span style="font-family: 'Product Sans', sans-serif; font-size: 11px; color: #6b7280;">💬 {comment_count:,} bình luận</span>
+        <a href="{url}" target="_blank" style="font-family: 'Product Sans', sans-serif; font-size: 11px; color: #0045c4; text-decoration: none;">Xem chi tiết →</a>
     </div>
 </div>
 '''
@@ -1408,16 +1408,16 @@ class SlideHTMLMerger:
             
             html += f'''<!-- Table Row {i} -->
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 80px; top: {top_pos}px; width: 80px; height: 20px; z-index: 205; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280;">{row["stt"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #6b7280;">{row["stt"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 180px; top: {top_pos}px; width: 500px; height: 20px; z-index: 206;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #111827;">{row["brand"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; color: #111827;">{row["brand"]}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 720px; top: {top_pos}px; width: 200px; height: 20px; z-index: 207; text-align: right;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4;">{row["total"]:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4;">{row["total"]:,}</p>
 </div>
 <div data-object="true" data-object-type="textbox" style="position: absolute; left: 960px; top: {top_pos}px; width: 220px; height: 20px; z-index: 208; text-align: right;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: {pct_color};">{pct_str}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: {pct_color};">{pct_str}</p>
 </div>
 '''
             # Separator (except for last row)
@@ -1446,25 +1446,25 @@ class SlideHTMLMerger:
             
             html += f'''<!-- Table Row {i} -->
 <div style="position: absolute; left: 70px; top: {top_pos}px; width: 50px; height: 35px; z-index: 205; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280;">{row["stt"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #6b7280;">{row["stt"]}</p>
 </div>
 <div style="position: absolute; left: 130px; top: {top_pos}px; width: 140px; height: 35px; z-index: 206;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{topic}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{topic}</p>
 </div>
 <div style="position: absolute; left: 280px; top: {top_pos}px; width: 380px; height: 35px; z-index: 207;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{content}</p>
 </div>
 <div style="position: absolute; left: 670px; top: {top_pos}px; width: 90px; height: 35px; z-index: 208; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563;">{row["channel"]}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563;">{row["channel"]}</p>
 </div>
 <div style="position: absolute; left: 770px; top: {top_pos}px; width: 160px; height: 35px; z-index: 209;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{site_name}</p>
 </div>
 <div style="position: absolute; left: 940px; top: {top_pos}px; width: 110px; height: 35px; z-index: 210; text-align: center;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4;">{row["comment_count"]:,}</p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 14px; font-weight: 700; color: #0045c4;">{row["comment_count"]:,}</p>
 </div>
 <div style="position: absolute; left: 1060px; top: {top_pos}px; width: 150px; height: 35px; z-index: 211;">
-<p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 13px;"><a href="{row["source_url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Xem chi tiết</a></p>
+<p style="margin: 0; font-family: 'Product Sans', sans-serif; font-size: 13px;"><a href="{row["source_url"]}" style="color: #0045c4; text-decoration: none;" target="_blank">Xem chi tiết</a></p>
 </div>
 '''
             # Separator
@@ -1558,7 +1558,7 @@ class SlideHTMLMerger:
         <div style="position: absolute; left: 0; top: 2px; width: 16px; height: 4px; background-color: {color}; border-radius: 2px;"></div>
         <div style="position: absolute; left: 4px; top: 0; width: 8px; height: 8px; background-color: {color}; border-radius: 50%; border: 2px solid #fff;"></div>
     </div>
-    <span style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #374151;">{brand}</span>
+    <span style="font-family: 'Product Sans', sans-serif; font-size: 12px; font-weight: 600; color: #374151;">{brand}</span>
 </div>''')
         
         legend_html = '\n'.join(legend_items)
@@ -1898,7 +1898,7 @@ class SlideHTMLMerger:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weekly Report - Complete</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <style>
@@ -1908,7 +1908,7 @@ class SlideHTMLMerger:
             box-sizing: border-box;
         }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Product Sans', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #f5f7fa;
             color: #111827;
         }

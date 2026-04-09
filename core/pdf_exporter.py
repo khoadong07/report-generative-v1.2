@@ -36,7 +36,7 @@ def merge_html_slides(output_dir="output", num_slides=16):
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Merged Report - 16 Slides</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0"></script>
@@ -48,7 +48,7 @@ def merge_html_slides(output_dir="output", num_slides=16):
     }
     
     body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Product Sans', sans-serif;
         background-color: #e5e7eb;
         padding: 0;
     }

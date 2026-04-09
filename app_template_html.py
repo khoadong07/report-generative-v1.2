@@ -622,78 +622,73 @@ if total_slides > 0:
             )
     
     with col_dl5:
-        # Export all slides as PDF
+        # Export all slides as PDF using Playwright
         if st.button("📄 Export PDF", use_container_width=True, type="primary"):
-            with st.spinner("Đang tạo PDF từ tất cả slides..."):
+            with st.spinner("Đang merge slides và tạo PDF..."):
                 try:
-                    import io
+                    from core.pdf_exporter import merge_and_export_pdf
                     
-                    # Merge all slides into one HTML
-                    merger = SlideHTMLMerger()
-                    merged_html = merger.merge_all_slides(data, slide_keys, date_range)
+                    # Merge HTML and export to PDF
+                    merged_html_path, pdf_path = merge_and_export_pdf(
+                        output_dir="output",
+                        num_slides=16
+                    )
                     
-                    # Try to convert to PDF
-                    pdf_bytes = None
-                    method_used = None
+                    # Check if PDF file exists regardless of return value
+                    expected_pdf = Path("output/merged_slides.pdf")
                     
-                    # Method 1: Try weasyprint (recommended)
-                    try:
-                        from weasyprint import HTML
-                        pdf_buffer = io.BytesIO()
-                        HTML(string=merged_html).write_pdf(pdf_buffer)
-                        pdf_bytes = pdf_buffer.getvalue()
-                        method_used = "weasyprint"
-                    except ImportError:
-                        pass
-                    except Exception as e:
-                        st.warning(f"Weasyprint failed: {e}")
-                    
-                    # Method 2: Try pdfkit if weasyprint not available
-                    if pdf_bytes is None:
-                        try:
-                            import pdfkit
-                            pdf_bytes = pdfkit.from_string(merged_html, False, options={
-                                'page-size': 'A4',
-                                'orientation': 'Landscape',
-                                'margin-top': '0',
-                                'margin-right': '0',
-                                'margin-bottom': '0',
-                                'margin-left': '0',
-                                'encoding': 'UTF-8',
-                                'enable-local-file-access': None,
-                                'no-stop-slow-scripts': None,
-                            })
-                            method_used = "pdfkit"
-                        except ImportError:
-                            pass
-                        except Exception as e:
-                            st.warning(f"Pdfkit failed: {e}")
-                    
-                    # If PDF conversion succeeded
-                    if pdf_bytes:
-                        st.download_button(
-                            "⬇️ Tải PDF",
-                            pdf_bytes,
-                            file_name=f"{brand_name}_report_{report_date:%Y%m%d}.pdf",
-                            mime="application/pdf",
-                            use_container_width=True,
-                        )
-                        st.success(f"✅ PDF đã sẵn sàng! (sử dụng {method_used})")
-                    else:
-                        # Fallback: download merged HTML
-                        st.warning("⚠️ Không thể tạo PDF. Cài đặt: pip install weasyprint")
-                        st.download_button(
-                            "⬇️ Tải HTML đầy đủ (fallback)",
-                            merged_html,
-                            file_name=f"{brand_name}_report_{report_date:%Y%m%d}.html",
-                            mime="text/html",
-                            use_container_width=True,
-                        )
+                    if expected_pdf.exists():
+                        # Read PDF file and save to session state
+                        with open(expected_pdf, 'rb') as f:
+                            pdf_bytes = f.read()
                         
+                        st.session_state['pdf_bytes'] = pdf_bytes
+                        st.session_state['pdf_ready'] = True
+                        st.session_state['pdf_filename'] = f"{brand_name}_report_{report_date:%Y%m%d}.pdf"
+                        st.success(f"✅ PDF đã tạo thành công! ({len(pdf_bytes) / 1024:.0f} KB)")
+                        st.rerun()
+                    else:
+                        st.error("❌ Không thể tạo PDF.")
+                        if merged_html_path and Path(merged_html_path).exists():
+                            st.info(f"✅ HTML đã được merge: {merged_html_path}")
+                            st.warning("⚠️ Lỗi khi convert sang PDF. Kiểm tra Playwright:")
+                            st.code("pip install playwright && playwright install chromium")
+                        else:
+                            st.error("❌ Không thể merge HTML slides")
+                        
+                except ImportError as e:
+                    st.error(f"❌ Thiếu thư viện: {e}")
+                    st.info("Cài đặt: pip install playwright beautifulsoup4 && playwright install chromium")
                 except Exception as e:
-                    st.error(f"Lỗi tạo PDF: {e}")
-                    import traceback
-                    st.code(traceback.format_exc())
+                    # Even if there's an error, check if PDF was created
+                    expected_pdf = Path("output/merged_slides.pdf")
+                    if expected_pdf.exists():
+                        with open(expected_pdf, 'rb') as f:
+                            pdf_bytes = f.read()
+                        
+                        st.session_state['pdf_bytes'] = pdf_bytes
+                        st.session_state['pdf_ready'] = True
+                        st.session_state['pdf_filename'] = f"{brand_name}_report_{report_date:%Y%m%d}.pdf"
+                        st.warning(f"⚠️ Có lỗi nhưng PDF đã được tạo: {e}")
+                        st.success(f"✅ PDF đã sẵn sàng tải xuống! ({len(pdf_bytes) / 1024:.0f} KB)")
+                        st.rerun()
+                    else:
+                        st.error(f"❌ Lỗi tạo PDF: {e}")
+                        import traceback
+                        with st.expander("Chi tiết lỗi"):
+                            st.code(traceback.format_exc())
+        
+        # Show download button if PDF is ready
+        if st.session_state.get('pdf_ready', False) and 'pdf_bytes' in st.session_state:
+            pdf_filename = st.session_state.get('pdf_filename', f"{brand_name}_report_{report_date:%Y%m%d}.pdf")
+            st.download_button(
+                "⬇️ Tải PDF",
+                st.session_state['pdf_bytes'],
+                file_name=pdf_filename,
+                mime="application/pdf",
+                use_container_width=True,
+                key="download_pdf_final"
+            )
 
 else:
     st.warning("Không có slides để hiển thị")

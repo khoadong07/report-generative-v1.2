@@ -65,3 +65,6 @@ demo/
 .dockerignore
 docker-compose.override.yml
 *.dockerfile
+
+node_modules/
+output/

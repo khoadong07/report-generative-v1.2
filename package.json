@@ -1,0 +1,16 @@
+{
+  "name": "html-to-pdf-merger",
+  "version": "1.0.0",
+  "description": "Merge HTML slides and convert to PDF",
+  "type": "commonjs",
+  "main": "test_generate.js",
+  "scripts": {
+    "test": "node test_generate.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "puppeteer": "^24.40.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
